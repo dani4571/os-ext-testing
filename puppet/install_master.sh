@@ -10,7 +10,7 @@ THIS_DIR=`pwd`
 DATA_REPO_INFO_FILE=$THIS_DIR/.data_repo_info
 DATA_PATH=$THIS_DIR/data
 OSEXT_PATH=$THIS_DIR/os-ext-testing
-OSEXT_REPO=https://github.com/jaypipes/os-ext-testing
+OSEXT_REPO=https://github.com/dani4571/os-ext-testing
 PUPPET_MODULE_PATH="--modulepath=$OSEXT_PATH/puppet/modules:/root/config/modules:/etc/puppet/modules"
 
 # Install Puppet and the OpenStack Infra Config source tree
@@ -79,6 +79,21 @@ else
     JENKINS_SSH_PUBLIC_KEY_CONTENTS=`sudo cat $DATA_PATH/$JENKINS_SSH_KEY_PATH.pub`
 fi
 
+# Validate there is a Nodepool SSH key pair in the data repository
+if [[ -z $NODEPOOL_SSH_KEY_PATH ]]; then
+    echo "Expected to find NODEPOOL_SSH_KEY_PATH in $DATA_PATH/vars.sh. Please correct. Exiting."
+    exit 1
+elif [[ ! -e "$DATA_PATH/$NODEPOOL_SSH_KEY_PATH" ]]; then
+    echo "Expected to find Jenkins SSH key pair at $DATA_PATH/$NODEPOOL_SSH_KEY_PATH, but wasn't found. Please correct. Exiting."
+    exit 1
+else
+    echo "Using Jenkins SSH key path: $DATA_PATH/$NODEPOOL_SSH_KEY_PATH"
+    NODEPOOL_SSH_PRIVATE_KEY_CONTENTS=`sudo cat $DATA_PATH/$NODEPOOL_SSH_KEY_PATH`
+    NODEPOOL_SSH_PUBLIC_KEY_CONTENTS=`sudo cat $DATA_PATH/$NODEPOOL_SSH_KEY_PATH.pub`
+fi
+
+
+
 PUBLISH_HOST=${PUBLISH_HOST:-localhost}
 
 # Create a self-signed SSL certificate for use in Apache
@@ -115,6 +130,7 @@ APACHE_SSL_CERT_FILE=`cat $APACHE_SSL_ROOT_DIR/new.cert.cert`
 APACHE_SSL_KEY_FILE=`cat $APACHE_SSL_ROOT_DIR/new.cert.key`
 
 CLASS_ARGS="jenkins_ssh_public_key => '$JENKINS_SSH_PUBLIC_KEY_CONTENTS', jenkins_ssh_private_key => '$JENKINS_SSH_PRIVATE_KEY_CONTENTS', "
+CLASS_ARGS="$CLASS_ARGS nodepool_ssh_public_key => '$NODEPOOL_SSH_PUBLIC_KEY_CONTENTS', nodepool_ssh_private_key => '$NODEPOOL_SSH_PRIVATE_KEY_CONTENTS', "
 CLASS_ARGS="$CLASS_ARGS ssl_cert_file_contents => '$APACHE_SSL_CERT_FILE', ssl_key_file_contents => '$APACHE_SSL_KEY_FILE', "
 CLASS_ARGS="$CLASS_ARGS upstream_gerrit_user => '$UPSTREAM_GERRIT_USER', "
 CLASS_ARGS="$CLASS_ARGS upstream_gerrit_ssh_private_key => '$UPSTREAM_GERRIT_SSH_PRIVATE_KEY_CONTENTS', "
