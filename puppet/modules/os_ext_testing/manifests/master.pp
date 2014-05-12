@@ -160,16 +160,16 @@ class os_ext_testing::master (
       password => '',
     }
 
-    file { '/etc/jenkins_jobs/config':
-      ensure  => directory,
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0755',
-      recurse => true,
-      force   => true,
-      source  => 'puppet:///modules/os_ext_testing/jenkins_job_builder/config',
-      notify  => Exec['jenkins_jobs_update'],
-    }
+    #file { '/etc/jenkins_jobs/config':
+    #  ensure  => directory,
+    #  owner   => 'root',
+    #  group   => 'root',
+    #  mode    => '0755',
+    #  recurse => true,
+    #  force   => true,
+    #  source  => 'puppet:///modules/os_ext_testing/jenkins_job_builder/config',
+    #  notify  => Exec['jenkins_jobs_update'],
+    #}
 
     file { '/etc/jenkins_jobs/config':
       ensure  => directory,
