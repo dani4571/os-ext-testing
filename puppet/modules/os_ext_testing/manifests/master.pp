@@ -23,6 +23,8 @@ class os_ext_testing::master (
   $git_email = 'testing@myvendor.com',
   $git_name = 'MyVendor Jenkins',
   $nodepool_template = 'nodepool.yaml.erb',
+  $mysql_root_password       => 'ostackdemo',
+  $mysql_password            => 'ostackdemo'
 ) {
   include os_ext_testing::base
   include apache
@@ -287,8 +289,8 @@ class os_ext_testing::master (
 
 
   class { '::nodepool':
-    mysql_root_password       => 'ostackdemo',
-    mysql_password            => 'ostackdemo',
+    mysql_root_password       => $mysql_root_password,
+    mysql_password            => $mysql_password,
     nodepool_ssh_private_key  => $nodepool_ssh_private_key,
     statsd_host               => $statsd_host,
   }
