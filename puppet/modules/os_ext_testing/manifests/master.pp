@@ -286,7 +286,7 @@ class os_ext_testing::master (
   }
 
 
-  class { '::nodepool'
+  class { '::nodepool':
     mysql_root_password       => 'ostackdemo',
     mysql_password            => 'ostackdemo',
     nodepool_ssh_private_key  => $nodepool_ssh_private_key,
