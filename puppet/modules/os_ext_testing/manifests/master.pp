@@ -22,9 +22,20 @@ class os_ext_testing::master (
   $upstream_gerrit_host_pub_key = '',
   $git_email = 'testing@myvendor.com',
   $git_name = 'MyVendor Jenkins',
+  $mysql_root_password,
+  $mysql_password,
+  $nodepool_ssh_private_key = '',
   $nodepool_template = 'nodepool.yaml.erb',
-  $mysql_root_password = 'ostackdemo',
-  $mysql_password = 'ostackdemo'
+  $sysadmins = [],
+  $statsd_host = '',
+  $jenkins_api_user ='',
+  $jenkins_api_key ='',
+  $jenkins_credentials_id ='',
+  $rackspace_username ='',
+  $rackspace_password ='',
+  $rackspace_project ='',
+  $image_log_document_root = '/var/log/nodepool/image',
+  $enable_image_log_via_http = true,
 ) {
   include os_ext_testing::base
   include apache
