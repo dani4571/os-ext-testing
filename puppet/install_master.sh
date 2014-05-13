@@ -79,21 +79,6 @@ else
     JENKINS_SSH_PUBLIC_KEY_CONTENTS=`sudo cat $DATA_PATH/$JENKINS_SSH_KEY_PATH.pub`
 fi
 
-# Validate there is a Nodepool SSH key pair in the data repository
-if [[ -z $NODEPOOL_SSH_KEY_PATH ]]; then
-    echo "Expected to find NODEPOOL_SSH_KEY_PATH in $DATA_PATH/vars.sh. Please correct. Exiting."
-    exit 1
-elif [[ ! -e "$DATA_PATH/$NODEPOOL_SSH_KEY_PATH" ]]; then
-    echo "Expected to find Jenkins SSH key pair at $DATA_PATH/$NODEPOOL_SSH_KEY_PATH, but wasn't found. Please correct. Exiting."
-    exit 1
-else
-    echo "Using Jenkins SSH key path: $DATA_PATH/$NODEPOOL_SSH_KEY_PATH"
-    NODEPOOL_SSH_PRIVATE_KEY_CONTENTS=`sudo cat $DATA_PATH/$NODEPOOL_SSH_KEY_PATH`
-    NODEPOOL_SSH_PUBLIC_KEY_CONTENTS=`sudo cat $DATA_PATH/$NODEPOOL_SSH_KEY_PATH.pub`
-fi
-
-
-
 PUBLISH_HOST=${PUBLISH_HOST:-localhost}
 
 # Create a self-signed SSL certificate for use in Apache
