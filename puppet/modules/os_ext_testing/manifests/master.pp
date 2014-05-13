@@ -25,7 +25,7 @@ class os_ext_testing::master (
   $mysql_root_password,
   $mysql_password,
   $nodepool_ssh_private_key = '',
-  $nodepool_template = 'nodepool.yaml.erb',
+  $nodepool_template = 'nodepool-dan.yaml.erb',
   $sysadmins = [],
   $statsd_host = '',
   $jenkins_api_user ='',
