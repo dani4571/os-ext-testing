@@ -53,6 +53,7 @@ APACHE_SSL_CERT_FILE=`cat $APACHE_SSL_ROOT_DIR/new.cert.cert`
 APACHE_SSL_KEY_FILE=`cat $APACHE_SSL_ROOT_DIR/new.cert.key`
 
 CLASS_ARGS="jenkins_api_key => '$JENKINS_API_KEY', "
+CLASS_ARGS="$CLASS_ARGS nodepool_ssh_public_key => '$NODEPOOL_SSH_PUBLIC_KEY_CONTENTS', nodepool_ssh_private_key => '$NODEPOOL_SSH_PRIVATE_KEY_CONTENTS', "
 CLASS_ARGS="$CLASS_ARGS jenkins_api_user => '$JENKINS_API_USER', "
 CLASS_ARGS="$CLASS_ARGS rackspace_username => '$RACKSPACE_USERNAME', "
 CLASS_ARGS="$CLASS_ARGS rackspace_password => '$RACKSPACE_PASSWORD', "
