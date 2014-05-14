@@ -168,14 +168,14 @@ class os_ext_testing::master (
       notify  => Exec['jenkins_jobs_update'],
     }
 
-    file { '/etc/jenkins_jobs/config/macros.yaml':
-      ensure => present,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0755',
-      content => template('os_ext_testing/jenkins_job_builder/config/macros.yaml.erb'),
-      notify  => Exec['jenkins_jobs_update'],
-    }
+    #file { '/etc/jenkins_jobs/config/macros.yaml':
+    #  ensure => present,
+    #  owner  => 'root',
+    #  group  => 'root',
+    #  mode   => '0755',
+    #  content => template('os_ext_testing/jenkins_job_builder/config/macros.yaml.erb'),
+    #  notify  => Exec['jenkins_jobs_update'],
+    #}
 
     file { '/etc/default/jenkins':
       ensure => present,
