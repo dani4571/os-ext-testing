@@ -15,9 +15,10 @@ PUPPET_MODULE_PATH="--modulepath=$OSEXT_PATH/puppet/modules:/root/config/modules
 
 # Install Puppet and the OpenStack Infra Config source tree
 if [[ ! -e install_puppet.sh ]]; then
-  wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
+  #wget https://git.openstack.org/cgit/openstack-infra/config/plain/install_puppet.sh
+  wget https://github.com/dani4571/config/raw/master/install_puppet.sh
   sudo bash -xe install_puppet.sh
-  sudo git clone https://review.openstack.org/p/openstack-infra/config.git \
+  sudo git clone https://github.com/dani4571/config.git \
     /root/config
   sudo /bin/bash /root/config/install_modules.sh
 fi
