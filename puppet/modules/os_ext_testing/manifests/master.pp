@@ -164,18 +164,18 @@ class os_ext_testing::master (
       mode    => '0755',
       recurse => true,
       force   => true,
-      source  => 'puppet:///modules/openstack_project/jenkins_job_builder/config',
+      source  => 'puppet:///modules/os_ext_testing/jenkins_job_builder/config',
       notify  => Exec['jenkins_jobs_update'],
     }
 
-    #file { '/etc/jenkins_jobs/config/macros.yaml':
-    #  ensure => present,
-    #  owner  => 'root',
-    #  group  => 'root',
-    #  mode   => '0755',
-    #  content => template('os_ext_testing/jenkins_job_builder/config/macros.yaml.erb'),
-    #  notify  => Exec['jenkins_jobs_update'],
-    #}
+    file { '/etc/jenkins_jobs/config/macros.yaml':
+      ensure => present,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+      content => template('os_ext_testing/jenkins_job_builder/config/macros.yaml.erb'),
+      notify  => Exec['jenkins_jobs_update'],
+    }
 
     file { '/etc/default/jenkins':
       ensure => present,
