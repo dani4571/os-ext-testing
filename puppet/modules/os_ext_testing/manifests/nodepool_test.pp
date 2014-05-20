@@ -18,6 +18,7 @@ class os_ext_testing::nodepool_test (
   $image_log_document_root = '/var/log/nodepool/image',
   $enable_image_log_via_http = true,
 ) {
+  include base
 
   class { '::nodepool':
     mysql_root_password       => $mysql_root_password,
